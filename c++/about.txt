@@ -1,0 +1,3 @@
+My implementations in C++. This is currently a language that
+i'm learning so I'll put the notes from the book i'm taking 
+within here as well. 
