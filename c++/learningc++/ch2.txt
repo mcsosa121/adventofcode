@@ -1,0 +1,223 @@
+Chapter 2: C++ program elements
+
+A c++ program consists of one or more named control blocks.
+The initial control block of a function must have the name main.
+
+Each block must have 0 or more statements.
+    Statements consist of 0 or more expressions
+        Expressions consist of 0 or more data items + an operator
+            Operands may be the conent of an identifier, constant, or a non-void
+            function call.
+            Data items must be declared with a declaration. This declaration
+            specifies the data type and identifier (name).
+                May be fundamental (eg integer) or derived (a class which includes
+                structure, union, arrray).
+                Class is a declaration of a user defined data type. Can contain
+                members (data and processing functions either private of public)
+C++ character set
+    Only supports certain stuff (ie some non-english char not allowed).
+
+Objects
+    A region of main storage and is assigned name (identifier) or referenced
+    by a pointer.
+    lvalue and rvalue are derived from the usage of objects in an assignment statement.
+    Lvalues
+        2 variants (modifiable and nonmodifiable)
+        Created by following values
+            [] array
+            * indirection
+            . or -> member selection.
+            ex. char ac[10];
+            ac = '1'; // invalid ac is not a modifiable lvalue
+            ac[0] = 1; //valid. ac[0] is a lvalue
+Identifiers
+    names that can denote one of the following
+        1. object
+        2. function
+        3. tag
+        4. typedef
+        5. label
+        6. Macro name or parameter
+    Usually have these attributes
+        1. Type
+            specifies the form of an objects content
+            2 types
+                A. Fundamental
+                    1. Arithmetic
+                        1. Integral
+                            a. Character (char - signed and unsigned)
+                            b. Integers (short, int, long -signed and unsigned)
+                            c. Enumerations
+                        2. Floating point
+                            a. Float
+                            b. Double
+                            c. Long double
+                        3. Pointer
+                    2. Empty set (void)
+                B. Derive
+                    1. Arrays
+                    2. Functions
+                    3. Pointers
+                    4. References
+                    5. Classes
+        2. Visibility (scope)
+            An identifier can only be used within its scope. C++ has 4 scopes
+            A. File
+                1. Outside all blocks and clases in the tranlation unit (module)
+                2. Is global
+            B. Class
+                1. Local to the class
+            C. Function
+                1. Labels
+            D. Local
+                1. Within a block
+        3. Uniqueness (linkage)
+            Identifiers refer to an object through linkage
+            3 forms
+            A. External
+                1. Denotes the same object (or function) in the complete program
+                2. Resolved with the linker program
+            B. Internal
+                1. Denotes the same object (or function) in a translation unit (module)
+            C. None
+                1. A unique instance
+            Name Space
+                The same visible identifier can be used in diffrent ways, in seperate name
+                spaces within a module (Label, tag (class, struct, union) , member
+                of class struct or union, and ordinary identifier)
+        4. Permanence (duration)
+            Objects have either a storage duration of:
+            A. Static
+                Storage is assigned before program startup and only initialized once.
+                This will exist throughout the programs duration.
+                Applies to objects with
+                    1. External linkage
+                    2. Internal Linkage
+                    3. static storage class
+            B. Automatic
+                Storage assigned in the block for which they are associated
+            External objects are considered global variables
+            Modern software engineering practices says keep number of global
+            variables as small as possible for data hiding.
+        5. Storage class
+            C++ has 4 explicit storage classes
+            A. Auto
+                Assigned storage when the block (function) in which they are defined is
+                invoked. Storage is terminated when the block (function) terminates.
+                By placing these definitions in the block that actually uses the objects, main
+                storage (usually on the stack) can be saved.
+            B. Extern
+                Explicitely specifies a storage object. Explicitely specifies an external
+                linkage (objects with file scope and without the static storage class
+                or const qualifier also have external linkage)
+                Two form of extern objects
+                    1. Those with initialization values (a definition)
+                    2. Those without a initialization value (i.e a declartion)
+            C. Register
+                Register variables are internal auto variables that are to be stored
+                in hardware registers, should such registers be available. Hardware
+                registers are processed faster than memory. However, only a limited
+                number of these hardware registers are present,
+                so the register attribute should only be given for variables that need
+                optimal performance (i.e inner control variables for loops).
+                The types that can be assigned the register attribute are
+                implementation-dependent; ie , int's can be given register attribute.
+                If register variables not available, they will be processed as auto
+                variables.
+            D. Static
+                Static keywords are used in 3 ways
+                1. An object with a block scope is given static storage duration
+                2. An object with a file scope is given internal linkage.
+                3. Static class members exist independently of class instantiations.
+                Objects with static storage duration are retained throughout the
+                program execution. Static storage objects are only initialized once.
+                If no explicit initialization is specified, they are initialized to 0.
+                Static storage objects retain their content on completion of
+                functions that use them.
+        6. Qualifier (modifiability)
+            Specifies how the object can be changed. If not spefcified,
+            the variable can be changed under the control of the program.
+            The const and volatile quantifiers can be used by the compiler
+            to determine where the objects are stored
+                Const-qualified objects can be stored in read only memory
+            Four combos possible
+                A. No qualifier (This is the default)
+                B. const
+                    Variable cannot be altered by program statements. with
+                    file scope, has external linkage. Otherwise internal linkage.
+                    May be place in ram depending on implementation
+                C. volatile
+                    Var may be altered by means unknown to the program,
+                    such as the system timer. Can affect optimization
+                    techniques. A const volatile cannot be optimized away.
+                D. const and volatile
+code example
+//Illustrates scopes, linkages, and visibilities of various identifiers
+SEE CODE FILE (SCF)
+
+Derived data types
+    are derived from functional data and may themselves be further derived from
+    other derived data types
+    1. Class
+        User defined data type. May contain member variables and member functions
+        which are either private, which is the default, or public
+        Private members can only be accessed via member functions of the class
+        Classes may be derived from other classes (inheritance)
+            Inheret private members from base class although they may ovveride these
+        A named class object is an instantiation of a class, class objects usually
+        just called objects
+        Two special member function types (constructor, or destructor). Auto invoked
+        Objects may be static or dynamic (created at runtime)
+        SCF
+        A. Structs (public members by default)
+            Structs are normall restricted to defining contiguous objects to form a DS
+            SCF
+        B. Union
+            Defines objects to occupy the same area of storage (redefinition)
+        enum - enumeration
+            Not a class subset but related.
+            Assigns integral values (enumerating) to a list of identifiers
+            Have numeric value one higher than previous on list,
+            unless assigned a specific identifier
+            A variable may be associated with the enumeration
+            SCF
+    2. Array
+        An ordered sequence of elements of the same type. elements can either be
+        fundamental or a data aggregate. Can me multidimensional.
+        Char string is a one dimensional array of characters. Most conventions
+        require to be terminated with a null char.
+        SCF
+    3. Function
+        Named block which receives 0 or more parameters. Depending on form
+        a function may return a value, the function return value.
+        A function without a return is a void function.
+        Main function is main part of a c++ program
+    4. Pointer
+        A pointer contains the afress of an object or a function (called indirection)
+        Multiple levels of indirection are permitted.
+        SCF
+    5. References
+        Alias of an object. Must be initialized when defined,
+        althoug the object being referenced can be changed at runtime
+        SCF
+    6. Initialization
+        c++ values can be assigned an initial value at their definition. Static objects
+        are initialized once, wheras auto objects are initialized every time
+        the block they reside in is invoked
+        If no explicit initialization is specified, non-auto objects are initialized to zero.
+        Similar form to assignment
+            - but i. declaratives must precede the program block
+            - but i. declaratives are declared with a certain data type
+        SCF
+    7. Data Storage (identity)
+    True OO environments have a two tier storage hierarchy
+        Nonpersistent and persistent
+    Each may be subcatacorized. Nonpersistent exist only while program
+    that created them is active. Persistent is retained.
+    C++ only has language support for NON-persistent
+    Two forms of this {Stack and free store}
+    Each np object has a unique address (until program termination).
+    C++ class objects are indentified by this pointer assoc. with the object
+    The this pointer is an implicit identifier that suffices for most simple applications
+    However, for peristent data an explicit object identifier is required.
+    SCF

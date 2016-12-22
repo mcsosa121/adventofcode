@@ -1,0 +1,117 @@
+C++ notes by Mike
+Taken from Anthony Rudd's "C++ complete: a reference and tutorial to the
+  proposed C++ standard"
+
+Chapter 1: Overview
+  C++ incorporates object oriented features while still being backwards compatible
+  with features of C (which is a procedural programming language).
+
+  OOP has three main features
+    Encapsulation - Data can only be manipulated through predefined methods
+        (member functions) that are part of the class.
+        C++ implements encapsulation by combining data and the corresponding
+        access methods (functions) as a single object in a particular class.
+        This definition chooses what is restricted (acces wise). Thus the class
+        specifies how the user manipulates the object data.
+
+    Inheritance - A dervied class inherits the data and functions from the base
+        class and obviates the nevessity of redefining them.
+        Allows the derived class to inheret non-private members (functions, data
+        or both) from a base class. The derived class can replace members and
+        functions with class-specific members and add new class-specific members.
+
+    Polymorphism - A particular method can have a number of forms,
+        each approprite to the situation that the method is being used in.
+        C++ implements polymorphism through virtual functions.
+        A virtual function is associated with a particular object rather than the class
+        as a whole. This means that the particular function form is determined at
+        runtime (late binding) instead of when the program is compiled (early binding)
+
+  Hybrid features of C++
+        Maintains the spirit of c while still being an object-oriented language.
+        With a few expections C++ is a full superset of ASNI C.
+        Classes:
+        New data types called classes. (user defined) The class name is the
+        data type name. A named object is an instantiation of a class and
+        defines the functions and object-specific data.
+        Class functions are called member functions. (Access is either private or public)
+        Member functions can be defined for the standard operators (operator functions).
+        Objects may be defined statically or dynamically (with the 'new' operator).
+        Consturctor is used to initialize, destructor used to deinitialize (invoked automatically
+        when the object goes out of scope).
+        Objects can be used in multiple classes through inheritance. Only public methods
+        in a base class can be used in a derived class.
+
+        Functions:
+        May have more than one implementation through overloading.
+        Member functions can be specified as vitual. Virtual functions are object-specific
+        ,rather than clas-specific, that is they are resolved at runtime. Are required when
+        objects are accessed using pointers.
+        Functions can be definied as inline (caused invocation to be expanded as inline)
+
+        References:
+        A reference is an alias to an object. REquired when an obect is to be used in an
+        intuitive manner.
+        The results of an overloaded operator (lvalue = left-value) is to be used as
+        rvalue (right-value) in a subsequent operation.
+
+        Templates:
+        A template is a class or function declaration that used a parametrized class name.
+        The instantiation specifies a particular class name or data type.
+
+        Exceptions:
+        Allowed to be defined as a class, with a particular exception being an object of that
+        class.
+
+        Class libraries:
+        Similar to C's standard library. Additions include the stream library.
+Sample C++ programs
+    1. Hello World
+    #include <iostream.h>
+
+    void main() {
+        cout << "Hello World" << endl;
+    }
+
+    2. Hello world definined
+    #include <string.h>
+    #invlude <stdio.h>
+
+    class DISPLAY {
+        public:
+            DISPLAY (char *pc) {
+                strncpy(str, pc, sizeof(str) -1 );
+                str[sizeof(str) -1];
+            }
+            void output { puts(str) };
+
+        private:
+            char str[256];
+    };
+
+    void main() {
+        DISPLAY text("Hello world");
+        text.output();
+    }
+    //This implementation defines Display for us and uses is to
+    //create a display object of hello world and output it.
+
+Preparation phases of C programs
+    3 Phases, Preprocesing, compilation, and link phases
+Excecution environment
+    c++ has two storage areas:
+        Free Store (the heap in C)
+        The Stack
+        ----------main storage--------------------
+        _______Stack (down)_____
+            Function args,etc.
+            Auto variables
+        ______________________
+
+        ______ Free Store (up)____
+            Dynamic allocation (new,etc.)
+        _______________________
+
+        _____Program___________
+        _______________________
+        --------------------------------------------------
